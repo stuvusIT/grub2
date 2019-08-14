@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+
+# Distribution defaults, can be overridden below
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_CMDLINE_LINUX=""
+
+# Ansible values
+{% for k,v in grub2_default_conf.items() %}
+k="{{ v }}"
+{% endfor %}

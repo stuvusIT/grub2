@@ -1,0 +1,20 @@
+---
+- name: Ensure grub is installed
+  apt:
+    name: grub2
+
+- name: Template default grub config
+  template:
+    src: default.j2
+    dest: /etc/default/grub
+    validate: bash -n %s
+    owner: root
+    group: root
+    mode: 0644
+  notify: Rebuild grub2 configuration
+
+- name: Enable/disable os-prober
+  file:
+    path: /etc/grub.d/30_os-prober
+    mode: "{% if grub2_os_prober %}+x{% else %}-x{%endif %}"
+  notify: Rebuild grub2 configuration

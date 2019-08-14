@@ -1,0 +1,3 @@
+---
+- name: Rebuild grub2 configuration
+  command: update-grub2
