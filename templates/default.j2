@@ -9,5 +9,5 @@ GRUB_CMDLINE_LINUX=""
 
 # Ansible values
 {% for k,v in grub2_default_conf.items() %}
-k="{{ v }}"
+{{ k }}="{{ v }}"
 {% endfor %}
