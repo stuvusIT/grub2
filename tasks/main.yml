@@ -13,8 +13,14 @@
     mode: 0644
   notify: Rebuild grub2 configuration
 
+- name: Check if OS prober include exists
+  stat:
+    path: /etc/grub.d/30_os-prober
+  register: os_prober_stat
+
 - name: Enable/disable os-prober
   file:
     path: /etc/grub.d/30_os-prober
     mode: "{% if grub2_os_prober %}+x{% else %}-x{%endif %}"
+  when: os_prober_stat.stat.exists
   notify: Rebuild grub2 configuration
